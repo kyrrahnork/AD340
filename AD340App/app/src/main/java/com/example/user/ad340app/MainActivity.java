@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
 
 
     @Override
@@ -15,9 +18,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Button submitButton = findViewById(R.id.submitButton);
+        Button button1 = findViewById(R.id.mainButton1);
+        Button button2 = findViewById(R.id.mainButton2);
+        Button button3 = findViewById(R.id.mainButton3);
+        Button button4 = findViewById(R.id.mainButton4);
+
+        button1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToMovieList = new Intent(MainActivity.this, MovieList.class);
+                startActivity(goToMovieList);
+            }
+        });
+
+        button2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Button 2 clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        button3.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Button 3 clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        button4.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Button 4 clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
+
+
 
     public void send(View v){
         Intent intent = new Intent(this, Welcome.class);
@@ -27,4 +66,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("Name", message);
                 startActivity(intent);
     }
+
 }

@@ -3,4 +3,9 @@
     <string name="myName">Kyrrah Nork</string>
     <string name="aboutMeTextView">I work as a tutor at SCC while taking classes at NSC.</string>
     <string name="submitButton">Submit</string>
+    <string name="mainButton1">Movies</string>
+    <string name="mainButton4">4</string>
+    <string name="mainButton2">2</string>
+    <string name="mainButton3">3</string>
+    <string name="movieListTextView">Movie List</string>
 </resources>
