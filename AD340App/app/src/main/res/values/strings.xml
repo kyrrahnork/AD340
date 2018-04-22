@@ -8,4 +8,6 @@
     <string name="mainButton2">2</string>
     <string name="mainButton3">3</string>
     <string name="movieListTextView">Movie List</string>
+    <string name="item_title">title</string>
+    <string name="item_year">year</string>
 </resources>

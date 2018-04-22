@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class MovieList extends AppCompatActivity {
@@ -120,8 +121,8 @@ public class MovieList extends AppCompatActivity {
             public TextView mDetail;
             public ViewHolder(View v) {
                 super(v);
-                mTitle = (TextView) v.findViewById(R.id.item_title);
-                mDetail = (TextView) v.findViewById(R.id.item_subtitle);
+                mTitle = v.findViewById(R.id.item_title);
+                mDetail = v.findViewById(R.id.item_year);
             }
         }
 
