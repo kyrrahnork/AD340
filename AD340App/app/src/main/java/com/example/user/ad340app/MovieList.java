@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -123,6 +122,8 @@ public class MovieList extends AppCompatActivity {
                 super(v);
                 mTitle = v.findViewById(R.id.item_title);
                 mDetail = v.findViewById(R.id.item_year);
+
+
             }
         }
 
