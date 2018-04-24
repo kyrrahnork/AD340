@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
 public class MovieList extends AppCompatActivity {
 
     Context context;
@@ -116,6 +117,7 @@ public class MovieList extends AppCompatActivity {
 
     public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
+Context context = getApplicationContext();
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
             public TextView mTitle;
