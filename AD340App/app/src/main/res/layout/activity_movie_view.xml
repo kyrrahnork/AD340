@@ -15,18 +15,16 @@
         tools:context=".MovieView"
         tools:showIn="@layout/activity_movie_view">
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/my_toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--android:elevation="4dp"-->
-            <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintHorizontal_bias="0.0"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-            <!--tools:layout_editor_absoluteY="2dp" />-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
 
         <TextView
             android:id="@+id/titleView2"
@@ -36,8 +34,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@id/my_toolbar"
+            app:layout_constraintTop_toBottomOf="@id/my_toolbar" />
 
         <TextView
             android:id="@+id/yearView2"

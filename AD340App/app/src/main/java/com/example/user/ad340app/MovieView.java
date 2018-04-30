@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 //import com.squareup.picasso.Picasso;
 //import android.widget.ImageView;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 
@@ -16,6 +17,9 @@ public class MovieView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_view);
+
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         Intent intent2 = getIntent();
 
@@ -33,7 +37,7 @@ public class MovieView extends AppCompatActivity {
 
         titleView2.setText("Title: " + title);
         yearView2.setText("Year: " + year);
-        directorView.setText("director: " + director);
+        directorView.setText("Director: " + director);
         descriptionView.setText("Description: " + description);
 
 
