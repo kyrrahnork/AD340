@@ -13,4 +13,6 @@
     <string name="title_activity_movie_view">MovieView</string>
     <string name="aboutTextViewTop">About AD 340 App</string>
     <string name="aboutPageTexViewBody">This is an app that was created for my AD 340 class at North Seattle College\'s Application Development BAS program.</string>
+    <string name="drawerOpen">Open navigation drawer</string>
+    <string name="drawerClose">Close navigation drawer</string>
 </resources>

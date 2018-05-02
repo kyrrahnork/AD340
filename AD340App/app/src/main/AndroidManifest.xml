@@ -8,8 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".MainActivity"
+            android:label="Kyrrah's AD 340 App"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,17 +21,24 @@
         </activity>
         <activity
             android:name=".Welcome"
-            android:label="Welcome" />
+            android:label="Welcome"
+            android:parentActivityName="com.example.user.ad340app.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MovieList"
-            android:label="Movie List" />
+            android:label="Movie List"
+            android:parentActivityName="com.example.user.ad340app.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MovieView"
-            android:label="Movie View" />
+            android:label="Movie View"
+            android:parentActivityName="com.example.user.ad340app.MovieList"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".About"
-            android:label="About" />
-
+            android:label="About this app"
+            android:parentActivityName="com.example.user.ad340app.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
