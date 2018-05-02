@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MovieList extends AppCompatActivity {
@@ -203,7 +204,7 @@ Context context = getApplicationContext();
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                // User chose the "Settings" item, show the app settings UI...
+                Toast.makeText(getApplicationContext(), "Settings option clicked!", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.action_share_movie_list:
