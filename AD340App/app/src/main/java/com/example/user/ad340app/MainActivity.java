@@ -1,6 +1,7 @@
 package com.example.user.ad340app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +19,9 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    private SharedPreferences savedValues;
+    private String visitorName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(getApplicationContext(), "Button 4 clicked!", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
 
         @Override
@@ -89,8 +96,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
 
         String message = visitorNameEditText.getText().toString();
+
+
+
         intent.putExtra("Name", message);
                 startActivity(intent);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        SharedPreferences.Editor editor = savedValues.edit();
+        editor.putString("visitorName", visitorName);
+        editor.commit();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
+
+        visitorName = savedValues.getString("visitorName", "");
+
+        visitorNameEditText.setText(visitorName);
     }
 
     @Override

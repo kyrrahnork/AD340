@@ -1,6 +1,7 @@
 package com.example.user.ad340app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,8 @@ public class Welcome extends AppCompatActivity {
         TextView greeting = findViewById(R.id.welcomeTextView);
 
         greeting.setText("Welcome, " + welcome);
+
+
 
     }
 
