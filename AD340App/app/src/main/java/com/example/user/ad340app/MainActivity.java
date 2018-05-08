@@ -9,13 +9,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -41,6 +41,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = savedValues.edit();
+        editor.putString("visitorName", "Kyrrah Test");
+        editor.apply();
+
+        EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
+        visitorName = savedValues.getString("visitorName", "Preferences does not have a value");
+        visitorNameEditText.setText(visitorName);
 
         Button submitButton = findViewById(R.id.submitButton);
         Button button1 = findViewById(R.id.mainButton1);
@@ -77,8 +86,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        submitButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
+                TextView textView2 = findViewById(R.id.textView2);
+                visitorName = savedValues.getString("visitorName", "");
 
-        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+                String name = visitorNameEditText.getText().toString();
+                if(!name.equals("")){
+                    if (!name.equals(visitorName)){
+                        SharedPreferences.Editor editor = savedValues.edit();
+                        editor.putString("visitorName", name);
+                        editor.apply();
+                    }
+                    Intent intent = new Intent(MainActivity.this, Welcome.class);
+                    intent.putExtra("Name", name);
+                    startActivity(intent);
+                }//end of if string is not empty
+                else{
+                    textView2.setText("Error, please enter a valid name");
+                }//string is empty
+
+            }//end of onClick
+        });
+
     }
 
         @Override
@@ -91,35 +123,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
-    public void send(View v){
-        Intent intent = new Intent(this, Welcome.class);
-        EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
-
-        String message = visitorNameEditText.getText().toString();
+    public void send(View v) {
 
 
-
-        intent.putExtra("Name", message);
-                startActivity(intent);
-    }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-        SharedPreferences.Editor editor = savedValues.edit();
-        editor.putString("visitorName", visitorName);
-        editor.commit();
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
-
-        visitorName = savedValues.getString("visitorName", "");
-
-        visitorNameEditText.setText(visitorName);
-    }
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

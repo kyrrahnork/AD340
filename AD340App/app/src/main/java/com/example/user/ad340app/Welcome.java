@@ -1,5 +1,6 @@
 package com.example.user.ad340app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ public class Welcome extends AppCompatActivity {
 
     public final String TAG = "Welcome activity";
 
-
+    private SharedPreferences savedValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,12 @@ public class Welcome extends AppCompatActivity {
 
         greeting.setText("Welcome, " + welcome);
 
-
-
+        //sharedView
+        TextView infoView = findViewById(R.id.prefsTextView);
+        //set text from sharedPref
+        savedValues = getSharedPreferences("SavedValues", Context.MODE_PRIVATE );
+        String sharedName = savedValues.getString("visitorName", "No value saved");
+        infoView.setText("This is the content from SharedPreferences from first activity: " + sharedName);
     }
 
     @Override
