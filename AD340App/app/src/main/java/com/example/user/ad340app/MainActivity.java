@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
 
         SharedPreferences.Editor editor = savedValues.edit();
-        editor.putString("visitorName", "Kyrrah Test");
+        editor.putString("visitorName", "Kyrrah test");
         editor.apply();
 
         EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
@@ -123,11 +123,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
-    public void send(View v) {
-
-
-        }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -176,4 +171,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public boolean inputIsValid(String str){
+        if (str.length() == 0){
+            return false;
+        }
+        return true;
+    }
+
+
 }
