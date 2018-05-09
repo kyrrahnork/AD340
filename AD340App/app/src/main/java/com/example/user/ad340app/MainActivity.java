@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SharedPreferences sharedPrefs;
     private String visitorName = "";
 
+    private SharedPreferencesHelper mSharedPreferencesHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +45,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         sharedPrefs = this.getPreferences(Context.MODE_PRIVATE);
-        visitorName = sharedPrefs.getString("visitorName", "");
+        mSharedPreferencesHelper = new SharedPreferencesHelper(sharedPrefs);
+
+        //visitorName = sharedPrefs.getString("visitorName", "");
 
         EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
-        visitorNameEditText.setText(visitorName);
+        visitorNameEditText.setText(mSharedPreferencesHelper.getEntry());
 
         Button submitButton = findViewById(R.id.submitButton);
         Button button1 = findViewById(R.id.mainButton1);
@@ -94,10 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 if(inputIsValid(name)){
-
-                        SharedPreferences.Editor editor = sharedPrefs.edit();
-                        editor.putString("visitorName", name);
-                        editor.apply();
+                    mSharedPreferencesHelper.saveEntry(name);
 
                     Intent intent = new Intent(MainActivity.this, Welcome.class);
                     intent.putExtra("Name", name);
