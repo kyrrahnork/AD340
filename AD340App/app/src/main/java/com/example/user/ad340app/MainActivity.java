@@ -1,5 +1,6 @@
 package com.example.user.ad340app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
@@ -20,7 +21,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private SharedPreferences savedValues;
+    private SharedPreferences sharedPrefs;
     private String visitorName = "";
 
     @Override
@@ -41,14 +42,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = savedValues.edit();
-        editor.putString("visitorName", "Kyrrah test");
-        editor.apply();
+        sharedPrefs = this.getPreferences(Context.MODE_PRIVATE);
+        visitorName = sharedPrefs.getString("visitorName", "");
 
         EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
-        visitorName = savedValues.getString("visitorName", "Preferences does not have a value");
         visitorNameEditText.setText(visitorName);
 
         Button submitButton = findViewById(R.id.submitButton);
@@ -91,15 +88,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 EditText visitorNameEditText = findViewById(R.id.visitorNameEditText);
                 TextView textView2 = findViewById(R.id.textView2);
-                visitorName = savedValues.getString("visitorName", "");
+
 
                 String name = visitorNameEditText.getText().toString();
-                if(!name.equals("")){
-                    if (!name.equals(visitorName)){
-                        SharedPreferences.Editor editor = savedValues.edit();
+
+
+                if(inputIsValid(name)){
+
+                        SharedPreferences.Editor editor = sharedPrefs.edit();
                         editor.putString("visitorName", name);
                         editor.apply();
-                    }
+
                     Intent intent = new Intent(MainActivity.this, Welcome.class);
                     intent.putExtra("Name", name);
                     startActivity(intent);
