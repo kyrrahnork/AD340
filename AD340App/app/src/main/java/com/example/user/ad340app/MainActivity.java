@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         button2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Button 2 clicked!", Toast.LENGTH_SHORT).show();
+                Intent goToCameraList = new Intent(MainActivity.this, Camera_list.class);
+                startActivity(goToCameraList);
             }
         });
 

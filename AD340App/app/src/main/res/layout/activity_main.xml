@@ -88,8 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:onClick="send"
-        android:text="@string/mainButton2"
+        android:text="Cams"
         app:layout_constraintBottom_toTopOf="@+id/mainButton4"
         app:layout_constraintStart_toEndOf="@+id/mainButton1" />
 

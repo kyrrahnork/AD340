@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user.ad340app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +14,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".MainActivity"
-            android:label="Kyrrah's AD 340 App"
+            android:label="Kyrrah&apos;s AD 340 App"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,23 +25,28 @@
         <activity
             android:name=".Welcome"
             android:label="Welcome"
-            android:parentActivityName="com.example.user.ad340app.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MovieList"
             android:label="Movie List"
-            android:parentActivityName="com.example.user.ad340app.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MovieView"
             android:label="Movie View"
-            android:parentActivityName="com.example.user.ad340app.MovieList"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:parentActivityName=".MovieList"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".About"
             android:label="About this app"
-            android:parentActivityName="com.example.user.ad340app.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Camera_list"
+            android:label="Traffic Cams"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
