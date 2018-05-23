@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Welcome">
+    tools:context=".MapsActivity" >
 
 <android.support.v7.widget.Toolbar
-    android:id="@+id/my_toolbar"
+    android:id="@+id/my_map_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
@@ -23,3 +23,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapsActivity" />
+
+</android.support.constraint.ConstraintLayout>
