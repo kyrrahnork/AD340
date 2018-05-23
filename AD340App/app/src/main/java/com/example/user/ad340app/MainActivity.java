@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         button3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Button 3 clicked!", Toast.LENGTH_SHORT).show();
+                Intent goToMapsActivity = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(goToMapsActivity);
             }
         });
 

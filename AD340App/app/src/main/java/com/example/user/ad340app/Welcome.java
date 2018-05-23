@@ -1,6 +1,5 @@
 package com.example.user.ad340app;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
