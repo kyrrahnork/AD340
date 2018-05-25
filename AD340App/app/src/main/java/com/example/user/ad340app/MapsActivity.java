@@ -1,6 +1,8 @@
 package com.example.user.ad340app;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +43,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -216,15 +221,45 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             for(int i = 1; i < jsonArray.length(); i+=2) {
                                 JSONObject feature =  jsonArray.getJSONObject(i);
 
-                                JSONArray p = feature.getJSONArray("PointCoordinate");
-                                LatLng pin = new LatLng(p.getDouble(0), p.getDouble(1));
-                                MarkerOptions marker = new MarkerOptions()
-                                        .position(pin)
-                                        .title(feature.getJSONArray("Cameras").getJSONObject(0).getString("Description"))
-                                        .snippet(URL+"/"+feature.getJSONArray("Cameras").getJSONObject(0).getString("ImageUrl"));
-                                mMap.addMarker(marker);
+                                // get coordinates of camera
+                                JSONArray coordinates = feature.getJSONArray("PointCoordinate");
+                                double latitude = coordinates.getDouble(0);
+                                double longitude = coordinates.getDouble(1);
 
-                                //TODO Add images to map markers
+                                JSONArray cameras = feature.getJSONArray("Cameras");
+                                JSONObject camera = cameras.getJSONObject(0);
+                                String type = camera.getString("Type");
+                                String imageURL = camera.getString("ImageUrl");
+                                String desc = camera.getString("Description");
+                                if (type.equals("sdot")) {
+                                    imageURL = "http://www.seattle.gov/trafficcams/images/"
+                                            + imageURL;
+                                } else {
+                                    imageURL = "http://images.wsdot.wa.gov/nw/" + imageURL;
+                                }
+
+                                CameraItem cam = new CameraItem(imageURL, desc);
+
+                                // Create info window
+                                CustomInfoWindow customWindow =
+                                        new CustomInfoWindow(MapsActivity.this);
+                                mMap.setInfoWindowAdapter(customWindow);
+
+                                //add map marker
+                                if (type.equals("sdot")) {
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .position(new LatLng(latitude, longitude))
+                                            .title(desc));
+                                    marker.setTag(cam);
+                                    marker.showInfoWindow();
+                                } else {
+                                    Marker marker = mMap.addMarker(new MarkerOptions()
+                                            .position(new LatLng(latitude, longitude))
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                            .title(desc));
+                                    marker.setTag(cam);
+                                    marker.showInfoWindow();
+                                }
 
                             }
                             } catch (JSONException error) { // json error
@@ -241,7 +276,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        //Log.d("------------", request.toString());
+
         requestQueue.add(request);
 
     }
@@ -256,6 +291,76 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(Location location) {
         mLastLocation = location;
         updateUI();
+    }
+
+
+    private class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
+
+        private Context context;
+
+        public CustomInfoWindow(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return null;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            // Check if the marker is a camera
+            if (marker.getTag() != null) {
+                View view = ((Activity) context).getLayoutInflater().inflate(R.layout.activity_info__window,
+                        null);
+                TextView cameraName = view.findViewById(R.id.info_window_desc);
+                ImageView cameraImg = view.findViewById(R.id.info_window_image);
+
+                cameraName.setText(marker.getTitle());
+                CameraItem camera = (CameraItem) marker.getTag();
+                String imageURL = camera.getImageURL();
+
+
+                Picasso.with(view.getContext()).load(imageURL).error(R.mipmap.ic_launcher)
+                        .resize(640, 480).into(cameraImg,
+                        new MarkerCallback(marker));
+
+                return view;
+            } else {
+                return null;
+            }
+        }
+
+        private class MarkerCallback implements Callback {
+            Marker marker = null;
+
+            MarkerCallback(Marker marker) {
+                this.marker = marker;
+            }
+
+            public void onError() {
+
+            }
+
+            @Override
+            public void onSuccess() {
+                if (marker == null) {
+                    return;
+                }
+
+                if (!marker.isInfoWindowShown()) {
+                    return;
+                }
+
+                marker.hideInfoWindow();
+                marker.showInfoWindow();
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        }
     }
 }
 

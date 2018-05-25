@@ -58,7 +58,10 @@
             android:label="Map"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".Info_Window"
+            android:label="@string/title_activity_info__window"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
