@@ -61,7 +61,7 @@ public class Camera_list extends AppCompatActivity {
 
 
     private void parseJSON() {
-        String URL = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
+        String URL = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=17&type=2";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>() {
@@ -72,6 +72,9 @@ public class Camera_list extends AppCompatActivity {
 
                             for(int i = 1; i < jsonArray.length(); i+=2) {
                                 JSONObject feature =  jsonArray.getJSONObject(i);
+
+                                JSONArray p = feature.getJSONArray("PointCoordinate");
+
 
                                 JSONArray f =  feature.getJSONArray("Cameras");
                                 for(int j = 0; j < f.length(); j++) {
