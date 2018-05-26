@@ -323,7 +323,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 Picasso.with(view.getContext()).load(imageURL).error(R.mipmap.ic_launcher)
                         .resize(640, 480).into(cameraImg,
-                        new MarkerCallback(marker));
+                                new MarkerCallback(marker));
 
                 return view;
             } else {
