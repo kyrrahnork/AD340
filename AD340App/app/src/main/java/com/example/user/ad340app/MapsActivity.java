@@ -46,6 +46,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -321,9 +322,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 String imageURL = camera.getImageURL();
 
 
-                Picasso.with(view.getContext()).load(imageURL).error(R.mipmap.ic_launcher)
-                        .resize(640, 480).into(cameraImg,
-                        new MarkerCallback(marker));
+                Picasso.get()
+                        .load(imageURL)
+                        .error(R.mipmap.ic_launcher)
+                        .resize(640, 480)
+                        .into(cameraImg, new MarkerCallback(marker));
 
                 return view;
             } else {
